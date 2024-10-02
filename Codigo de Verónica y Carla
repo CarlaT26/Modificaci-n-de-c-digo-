@@ -28,10 +28,11 @@ void Iniciar_OLED() {
     oled.begin();
     oled.setTextSize(1);
     oled.setTextColor(1);
-    @@ -40,46 +38,62 @@ 
-    int main()
     oled.display();
-    oled.printf( "Test\r\n" );
+    ThisThread::sleep_for(3000ms);
+    oled.clearDisplay();
+    oled.display();
+    oled.printf("Test\r\n");
     oled.display();
  }
 

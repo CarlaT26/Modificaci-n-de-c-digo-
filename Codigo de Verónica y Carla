@@ -4,14 +4,16 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_SSD1306.h" 
 #include <cstring>
+
 #define tiempo_muestreo   1s
-// Dirección del TMP102
 #define TMP102_ADDRESS 0x90
+
 //Pines y puertos 
 BufferedSerial serial(USBTX, USBRX);
 I2C i2c (D14,D15);
 Adafruit_SSD1306_I2c oled (i2c, D0);
 AnalogIn ain(A0);
+
 // Variables globales 
 float Vin=0.0;
 int ent=0;
@@ -26,23 +28,27 @@ void Iniciar_OLED() {
     oled.begin();
     oled.setTextSize(1);
     oled.setTextColor(1);
-	@@ -40,46 +38,62 @@ int main()
+    @@ -40,46 +38,62 @@ 
+    int main()
     oled.display();
     oled.printf( "Test\r\n" );
     oled.display();
  }
 
-void Iniciar_Sensor() {
+void Iniciar_Sensor() 
+{
     //arranque del sensor de temperatura
      i2c.write(TMP102_ADDRESS, comando, 3);
 }
 
-void Saludo_Serial() {
+void Saludo_Serial() 
+{
     // saludo por el puerto serial
     serial.write(mensaje_inicio, strlen(mensaje_inicio));
 }
 
-void Leer_Potenciometro() {
+void Leer_Potenciometro() 
+{
    Vin = ain*3.3;
    ent = int(Vin); 
    dec = int((Vin-ent)*10000); 
@@ -58,7 +64,8 @@ void Leer_Potenciometro() {
    serial.write(men, strlen(men));
 }
 
-void Leer_Temperatura(){
+void Leer_Temperatura()
+{
    //Lectura sensor I2C
    // Leer el registro de temperatura
    comando[0] = 0; // Registro de temperatura
